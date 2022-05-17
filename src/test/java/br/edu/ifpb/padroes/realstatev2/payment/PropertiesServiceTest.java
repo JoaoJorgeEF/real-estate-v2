@@ -2,6 +2,7 @@ package br.edu.ifpb.padroes.realstatev2.payment;
 
 import br.edu.ifpb.padroes.realstatev2.domain.Apartment;
 import br.edu.ifpb.padroes.realstatev2.domain.Bungalow;
+import br.edu.ifpb.padroes.realstatev2.domain.Compound;
 import br.edu.ifpb.padroes.realstatev2.domain.Tenement;
 import br.edu.ifpb.padroes.realstatev2.payment.processors.GovernmentTaxesPayment;
 import br.edu.ifpb.padroes.realstatev2.payment.processors.PropertyPayment;
@@ -31,9 +32,7 @@ public class PropertiesServiceTest {
         propertiesService.payProperties();
 
         InOrder inOrder = inOrder(paymentService);
-        inOrder.verify(paymentService).pay(any(Apartment.class));
-        inOrder.verify(paymentService).pay(any(Bungalow.class));
-        inOrder.verify(paymentService).pay(any(Tenement.class));
+        inOrder.verify(paymentService).pay(any(Compound.class));
     }
 
 }

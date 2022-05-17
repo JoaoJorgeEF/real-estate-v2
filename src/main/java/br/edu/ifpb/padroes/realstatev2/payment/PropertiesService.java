@@ -2,6 +2,7 @@ package br.edu.ifpb.padroes.realstatev2.payment;
 
 import br.edu.ifpb.padroes.realstatev2.domain.Apartment;
 import br.edu.ifpb.padroes.realstatev2.domain.Bungalow;
+import br.edu.ifpb.padroes.realstatev2.domain.Compound;
 import br.edu.ifpb.padroes.realstatev2.domain.Tenement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -31,10 +32,10 @@ public class PropertiesService {
         bungalow.setBuilder("Cortiço construtura");
         bungalow.setPrice(BigDecimal.valueOf(100000));
 
-        // TODO - reduzir chamadas múltiplas para uma única chamada para o método pay() utilizando o padrão composite
-        paymentService.pay(apartment);
-        paymentService.pay(bungalow);
-        paymentService.pay(tenament);
+        Compound comp = new Compound(apartment, bungalow, tenament);
+
+        paymentService.pay(comp);
+
 
     }
 
