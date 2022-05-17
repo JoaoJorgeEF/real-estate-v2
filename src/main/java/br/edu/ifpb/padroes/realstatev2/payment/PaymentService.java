@@ -10,18 +10,20 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class PaymentService {
-
     private final GovernmentTaxesPayment governmentTaxesPayment;
     private final RealEstatePayment realEstatePayment;
     private final PropertyPayment propertyPayment;
 
     public void pay(Property sale) {
-
+        PaymentProcessor processor = new GovernmentTaxesPayment();
+        processor
+                .linkWith(new RealEstatePayment())
+                .linkWith(new PropertyPayment());
+        processor.process(sale);
         // TODO - implementar Chain of Responsibility para que ordem dos métodos de pagamento seja dinâmica (definida em tempo de execução)
-        governmentTaxesPayment.process(sale);
-        realEstatePayment.process(sale);
-        propertyPayment.process(sale);
-
+//        governmentTaxesPayment.process(sale);
+//        realEstatePayment.process(sale);
+//        propertyPayment.process(sale);
     }
 
 }

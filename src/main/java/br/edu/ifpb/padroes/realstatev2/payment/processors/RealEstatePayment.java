@@ -9,10 +9,12 @@ import java.math.BigDecimal;
 
 @Slf4j
 @Service
-public class RealEstatePayment implements PaymentProcessor {
+public class RealEstatePayment extends PaymentProcessor {
     @Override
-    public void process(Property property) {
+    public boolean process(Property property) {
         BigDecimal realStateComission = property.getPrice().multiply(BigDecimal.valueOf(0.10));
         log.info(String.format("Pay %f for real state", realStateComission));
+
+        return processNext(property);
     }
 }
